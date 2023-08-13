@@ -4,8 +4,6 @@ on:
   push:
     tags:
       - v*
-    branches:
-      - main
 
 permissions:
   contents: write
@@ -31,7 +29,7 @@ jobs:
       - name: Get tag name
         run: |
           set -x
-          echo "VERSION_TAG=${GITHUB_REF/refs\/tags\//}" >> $GITHUB_ENV    
+          echo "VERSION_TAG=${GITHUB_REF#refs/tags/}" >> $GITHUB_ENV
 
       - name: Build app
         uses: gradle/gradle-command-action@v2
