@@ -1,10 +1,14 @@
 name: Build Release Apk
 
-on: workflow_dispatch
+on:
+  push:
+    tags:
+      - 'v*'
+    branches:
+      - main
 
 permissions:
   contents: write
-
 
 jobs:
   build:
@@ -24,6 +28,11 @@ jobs:
           java-version: 17
           distribution: adopt
 
+      - name: Get tag name
+        run: |
+          set -x
+          echo "VERSION_TAG=${GITHUB_REF/refs\/tags\//}" >> $GITHUB_ENV    
+
       - name: Build app
         uses: gradle/gradle-command-action@v2
         with:
@@ -39,12 +48,17 @@ jobs:
           keyStorePassword: ${{ secrets.KEYSTOREPASSWORD  }}
           keyPassword: ${{ secrets.KEYPASSWORD }}
 
+      - name: Clean up build artifacts
+        run: |
+            set -e
+            mv app/build/outputs/apk/release/app-release-unsigned-signed.apk cricskore-${{ env.VERSION_TAG }}.apk
+
       - name: Create Release
         uses: softprops/action-gh-release@v1
         with:
-          name: CricSkore
+          name: CricSkore ${{ env.VERSION_TAG }}
           body: App Release
-          files: ${{steps.sign_app.outputs.signedReleaseFile}}
+          files: cricskore-${{ env.VERSION_TAG }}.apk
           draft: true
           prerelease: false
         env:
