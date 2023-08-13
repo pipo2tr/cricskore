@@ -21,6 +21,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
@@ -38,6 +39,7 @@ import androidx.wear.compose.material.dialog.Alert
 import androidx.wear.compose.material.dialog.Dialog
 import androidx.wear.compose.material.itemsIndexed
 import androidx.wear.compose.material.rememberScalingLazyListState
+import com.pipo2tr.cricskore.R
 import com.pipo2tr.cricskore.app.theme.CricSkoreTheme
 import com.pipo2tr.cricskore.app.ui.common.Indicator
 import com.pipo2tr.cricskore.app.utils.Item
@@ -104,12 +106,13 @@ fun Home(onPreviewClicked: (String) -> Unit, onSettingsClicked: () -> Unit) {
                     ) {
                     item {
                         Text(
-                            text = "CrickScore",
+                            text = ctx.getString(R.string.app_name),
                             fontSize = 18.sp,
                             style = TextStyle(
                                 fontWeight = FontWeight.Bold,
                                 color = Color.White,
-                                textAlign = TextAlign.Center
+                                textAlign = TextAlign.Center,
+                                fontFamily = FontFamily.Cursive
                             ),
                             modifier = Modifier.padding(5.dp)
 

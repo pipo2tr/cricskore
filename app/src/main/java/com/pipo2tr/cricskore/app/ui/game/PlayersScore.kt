@@ -4,7 +4,6 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
@@ -27,50 +26,39 @@ import com.pipo2tr.cricskore.app.utils.GameSummaryParser
 
 @Composable
 fun PlayerScores(summary: GameSummaryParser, isRefreshing: Boolean) {
+
+    val currentTime = TimeTextDefaults.timeSource(TimeTextDefaults.timeFormat()).currentTime
+    LoadingTimeText(isLoading = isRefreshing, text = currentTime)
+    Divider(color = Color.DarkGray, thickness = 1.dp)
+    BattingInfo(summary)
+    Divider(color = Color.DarkGray, thickness = 1.dp)
+    BowlingInfo(summary)
+    Divider(color = Color.DarkGray, thickness = 1.dp)
+
     Column(
         modifier = Modifier
             .fillMaxWidth()
-            .fillMaxHeight()
-            .padding(8.dp),
-        verticalArrangement = Arrangement.SpaceEvenly,
-        horizontalAlignment = Alignment.CenterHorizontally,
+            .padding(16.dp, 0.dp)
     ) {
-        val currentTime = TimeTextDefaults.timeSource(TimeTextDefaults.timeFormat()).currentTime
-        LoadingTimeText(isLoading = isRefreshing, text = currentTime)
-        Divider(color = Color.DarkGray, thickness = 1.dp)
-        BattingInfo(summary)
-        Divider(color = Color.DarkGray, thickness = 1.dp)
-        BowlingInfo(summary)
-        Divider(color = Color.DarkGray, thickness = 1.dp)
-
-        Column(
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(16.dp, 0.dp)
-        ) {
-            Text(
-                summary.partnership,
-                color = Color.LightGray,
-                fontSize = 10.sp,
-                fontWeight = FontWeight.Normal,
-                textAlign = TextAlign.Center,
-                modifier = Modifier.fillMaxWidth()
-            )
-            Spacer(modifier = Modifier.height(1.dp))
-            Text(
-                summary.lastWicket,
-                color = Color.LightGray,
-                fontSize = 10.sp,
-                fontWeight = FontWeight.Normal,
-                textAlign = TextAlign.Center,
-                modifier = Modifier.fillMaxWidth()
-            )
-        }
-
+        Text(
+            summary.partnership,
+            color = Color.LightGray,
+            fontSize = 10.sp,
+            fontWeight = FontWeight.Normal,
+            textAlign = TextAlign.Center,
+            modifier = Modifier.fillMaxWidth()
+        )
+        Spacer(modifier = Modifier.height(1.dp))
+        Text(
+            summary.lastWicket,
+            color = Color.LightGray,
+            fontSize = 10.sp,
+            fontWeight = FontWeight.Normal,
+            textAlign = TextAlign.Center,
+            modifier = Modifier.fillMaxWidth()
+        )
     }
-
 }
-
 
 @Composable
 fun BattingInfo(summary: GameSummaryParser) {

@@ -13,22 +13,19 @@ import androidx.wear.compose.material.AutoCenteringParams
 import androidx.wear.compose.material.ScalingLazyColumn
 import androidx.wear.compose.material.items
 import androidx.wear.compose.material.rememberScalingLazyListState
-import com.pipo2tr.cricskore.app.theme.CricSkoreTheme
 import com.pipo2tr.cricskore.app.utils.CommentaryInfo
 import com.pipo2tr.cricskore.app.utils.GameSummaryParser
 
 @Composable
 fun Commentary(summary: GameSummaryParser) {
     val state = rememberScalingLazyListState()
-    CricSkoreTheme {
-        ScalingLazyColumn(
-            state = state,
-            modifier = Modifier.fillMaxWidth(),
-            autoCentering = AutoCenteringParams(itemIndex = 0)
-        ) {
-            items(summary.commentary) {
-                BallCommentary(comms = it)
-            }
+    ScalingLazyColumn(
+        state = state,
+        modifier = Modifier.fillMaxWidth(),
+        autoCentering = AutoCenteringParams(itemIndex = 0)
+    ) {
+        items(summary.commentary) {
+            BallCommentary(comms = it)
         }
     }
 

@@ -3,7 +3,7 @@ package com.pipo2tr.cricskore.app.utils
 import org.json.JSONArray
 import org.json.JSONObject
 
-
+// This could probably have been done using kotlin Serialization, but the data was too complex and honestly I cga, so leaving it as TODO
 class GameSummaryParser(raw: String) {
     var teams = mutableListOf<TeamInfo>()
     val batsMen = mutableListOf<LiveBatsman>()
