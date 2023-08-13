@@ -3,7 +3,7 @@ name: Build Release Apk
 on:
   push:
     tags:
-      - 'v*'
+      - v*
     branches:
       - main
 
@@ -43,10 +43,10 @@ jobs:
         uses: r0adkll/sign-android-release@v1
         with:
           releaseDirectory: app/build/outputs/apk/release
-          signingKeyBase64: ${{ secrets.SIGNINGKEYBASE64 }}
+          signingKeyBase64: ${{ secrets.SIGNING_KEY }}
           alias: ${{ secrets.ALIAS }}
-          keyStorePassword: ${{ secrets.KEYSTOREPASSWORD  }}
-          keyPassword: ${{ secrets.KEYPASSWORD }}
+          keyStorePassword: ${{ secrets.KEYSTORE_PASSWORD  }}
+          keyPassword: ${{ secrets.KEY_PASSWORD }}
 
       - name: Clean up build artifacts
         run: |
