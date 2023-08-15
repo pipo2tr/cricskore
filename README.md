@@ -13,7 +13,7 @@
 	</div>
 	<div align="center">
 		<img src="./screenshots/PlayerScoreScreen.png" height="300px" width="300px" />
-		<img src="./screenshots/CommentaryScreen.png" height="300px" width="300px" />
+		<img src="./screenshots/commentaryScreen.png" height="300px" width="300px" />
 	</div>
 </div>
 
