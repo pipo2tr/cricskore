@@ -68,24 +68,28 @@ fun separateTeamAndScore(input: String): Pair<String, String> {
         return Pair(formatTeamName(input), "")
     }
 
-    val regexPattern = "^(\\D+)\\s+(.+)\$"
-    val regex = Regex(regexPattern)
-    val matchResult = regex.find(input)
+    val regex = Regex("""(\w+(?:\s\w+)*)\s(\d+(?:/\d+)?)(?:\s*&\s*(\d+(?:/\d+)?))?""")
+    val matches = regex.findAll(input)
 
-    if (matchResult != null && matchResult.groupValues.size == 3) {
-        val teamName = formatTeamName(matchResult.groupValues[1].trim())
-        var score = matchResult.groupValues[2].trim().replace(" *", "")
-        if (!score.contains("/")) {
-            score += "/0"
+    for (match in matches) {
+
+        val teamName = formatTeamName(match.groupValues[1].trim())
+        val score1 = match.groupValues[2]
+        val score2 = match.groupValues[3]
+        val score = when {
+            score1.isNotBlank() && score2.isNotBlank() -> "$score1 & $score2"
+            score1.isNotBlank() -> score1
+            score2.isNotBlank() -> score2
+            else -> ""
         }
-        return Pair(teamName, score)
+        return Pair(teamName, score.trim())
     }
 
     return Pair(input.trim(), "")
 }
 
 fun formatTeamName(name: String): String {
-    return name.replace("Women", "W").replace("Men", "M")
+    return name.replace("Women", "W").replace("Men", "M").replace("Under", "U")
 }
 
 fun extractMatchIdFromUrl(url: String): String {
@@ -93,6 +97,7 @@ fun extractMatchIdFromUrl(url: String): String {
     val matchResult = regex.find(url)
     return matchResult?.groupValues?.getOrNull(1).orEmpty()
 }
+
 
 val topICCNations = arrayOf(
     "England",
