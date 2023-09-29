@@ -75,9 +75,13 @@ fun BattingInfo(summary: GameSummaryParser) {
         )
         Column(horizontalAlignment = Alignment.Start) {
             summary.batsMen.forEach { batsman ->
-                Text(batsman.name.padEnd(14), textAlign = TextAlign.Start, fontSize = 10.sp)
+                Text(
+                    batsman.name.padEnd(14),
+                    textAlign = TextAlign.Start,
+                    color = Color.White,
+                    fontSize = 10.sp
+                )
             }
-
         }
         Divider(
             color = MaterialTheme.colors.background,
@@ -86,12 +90,21 @@ fun BattingInfo(summary: GameSummaryParser) {
         )
         Column(horizontalAlignment = Alignment.End) {
             summary.batsMen.forEach { batsman ->
-                Text(
-                    "${batsman.runs}(${batsman.balls})",
-                    textAlign = TextAlign.End,
-                    fontSize = 8.sp,
-                    color = Color.Gray
-                )
+                Row(verticalAlignment = Alignment.CenterVertically) {
+                    Text(
+                        "${batsman.runs}",
+                        textAlign = TextAlign.End,
+                        fontSize = 10.sp,
+                        color = Color.LightGray,
+                        modifier = Modifier.padding(0.dp, 0.dp, 1.dp, 0.dp)
+                    )
+                    Text(
+                        "(${batsman.balls})",
+                        textAlign = TextAlign.End,
+                        fontSize = 8.sp,
+                        color = Color.Gray
+                    )
+                }
             }
         }
     }
@@ -112,7 +125,12 @@ fun BowlingInfo(summary: GameSummaryParser) {
         )
         Column(horizontalAlignment = Alignment.Start) {
             summary.bowlers.forEach { bowler ->
-                Text(bowler.name.padEnd(14), textAlign = TextAlign.Start, fontSize = 10.sp)
+                Text(
+                    bowler.name.padEnd(14),
+                    textAlign = TextAlign.Start,
+                    fontSize = 10.sp,
+                    color = Color.White
+                )
             }
         }
         Divider(
@@ -122,12 +140,21 @@ fun BowlingInfo(summary: GameSummaryParser) {
         )
         Column(horizontalAlignment = Alignment.End) {
             summary.bowlers.forEach { bowler ->
-                Text(
-                    "${bowler.wickets}/${bowler.runs}(${bowler.overs})",
-                    textAlign = TextAlign.End,
-                    fontSize = 8.sp,
-                    color = Color.Gray
-                )
+                Row(verticalAlignment = Alignment.CenterVertically) {
+                    Text(
+                        "${bowler.wickets}/${bowler.runs}",
+                        textAlign = TextAlign.End,
+                        fontSize = 10.sp,
+                        color = Color.LightGray,
+                        modifier = Modifier.padding(0.dp, 0.dp, 1.dp, 0.dp)
+                    )
+                    Text(
+                        "(${bowler.overs})",
+                        textAlign = TextAlign.End,
+                        fontSize = 8.sp,
+                        color = Color.Gray
+                    )
+                }
             }
         }
     }
